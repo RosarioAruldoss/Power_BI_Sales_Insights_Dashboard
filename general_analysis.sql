@@ -47,11 +47,35 @@ SELECT count(*) FROM sales.transactions where market_code = "Mark001"; -- 1035 r
 -- USD OUTLIER
 -- Earlier we observed that there are 2 USD transactions in [transactions] table. Let's check how many are there in total.
 SELECT * FROM sales.transactions where currency = "USD"; -- 2 records are mentioned in USD in total. 
+-- When building the dashboard, this has to be converted to INR. 
 
 -- NEGATIVE VALUE OUTLIER
 -- Earlier we observed that there are 1 NEGATIVE VALUE in sale_amount field of [transactions] table. Let's check how many are 
 -- there in total.
-SELECT * FROM sales.transactions where sales_amount <= "0"; -- 2 records are mentioned in USD in total. 
+SELECT * FROM sales.transactions where sales_amount <= "0"; -- 2 records are mentioned in USD in total. (year - 2018)
 SELECT count(*) FROM sales.transactions where sales_amount = "0"; -- 1609 records are mentioned in USD in total. 
 SELECT count(*) FROM sales.transactions where sales_amount < "0"; -- 2 records have negative values 
+
+-- TRANSACTIONS BY YEAR 
+
+-- Let's filter out the transactions based on year
+-- In the [date] table we can see that the year is given in a separate field. 
+
+-- INNER JOIN the [date] and [transactions] on order date will give the years
+SELECT sales.transactions.*, sales.date.* FROM sales.transactions INNER JOIN sales.date on sales.transactions.order_date = sales.date.date;
+
+-- Get filtered transactions based on year 
+SELECT sales.transactions.*, sales.date.* FROM sales.transactions INNER JOIN sales.date on sales.transactions.order_date = sales.date.date WHERE year = "2017";
+-- we can alter the year and get the respective data for that year.
+
+-- YEARLY REVENUE
+
+-- Let's find out the total revenue based on year.
+SELECT SUM(sales.transactions.sales_amount) FROM sales.transactions INNER JOIN sales.date on sales.transactions.order_date = sales.date.date WHERE year = "2017"; 
+-- Sample: 93569152 Rupees in Total for the year 2017
+-- in the year 2018, there are USD transactions.
+
+ 
+ 
+
 
