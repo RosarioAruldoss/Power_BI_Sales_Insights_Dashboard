@@ -71,9 +71,19 @@ SELECT sales.transactions.*, sales.date.* FROM sales.transactions INNER JOIN sal
 -- YEARLY REVENUE
 
 -- Let's find out the total revenue based on year.
-SELECT SUM(sales.transactions.sales_amount) FROM sales.transactions INNER JOIN sales.date on sales.transactions.order_date = sales.date.date WHERE year = "2017"; 
+SELECT SUM(sales.transactions.sales_amount) FROM sales.transactions INNER JOIN sales.date on sales.transactions.order_date = sales.date.date WHERE year = "2020"; 
 -- Sample: 93569152 Rupees in Total for the year 2017
+-- 336452114 in 2019
+-- 142235559 in 2020 (The revenue is reducing compared to the previous year.)	
 -- in the year 2018, there are USD transactions.
+
+-- YEAR AND CITY WISE REVENUE
+
+-- Let's find out the total revenue based on CITY- markets_code and year.
+SELECT SUM(sales.transactions.sales_amount) FROM sales.transactions INNER JOIN sales.date on sales.transactions.order_date = sales.date.date 
+WHERE sales.date.year = 2020 and sales.transactions.market_code = "Mark001"; 
+-- Sample: 2463024 Rupees in Total revenue for the year 2020 in Chennai city.
+
 
  
  
