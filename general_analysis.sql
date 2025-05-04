@@ -84,6 +84,11 @@ SELECT SUM(sales.transactions.sales_amount) FROM sales.transactions INNER JOIN s
 WHERE sales.date.year = 2020 and sales.transactions.market_code = "Mark001"; 
 -- Sample: 2463024 Rupees in Total revenue for the year 2020 in Chennai city.
 
+-- CITY WISE DISTINCT PRODUCTS
+
+select distinct	product_code from sales.transactions where market_code = "Mark001"; -- Gives the details for the distinct products sold in CHennai city - Mark001 
+select count(distinct	product_code) from sales.transactions where market_code = "Mark001"; -- Gives the count of distinct products sold in CHennai city - 77 products
+
 
  
  
